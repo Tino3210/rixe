@@ -1,4 +1,4 @@
-# rixe
+# Rixe
 
 ## Description
 Le jeu est une application WPF avec C#, qui se joue à deux joueurs. Ils doivent s'envoyer ou esquiver des projectiles sans la possibilité de voir son opposant sur l'écran. Pour envoyer un projectile sur l'écran de l'autre joueur, il faut qu'il traverse le haut de l'écran. À chaque coup reçu, le joueur perd un point de vie. La partie se termine quand un des deux joueurs à perdu ces trois vies.
