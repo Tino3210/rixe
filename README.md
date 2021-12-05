@@ -11,7 +11,6 @@ Le jeu est une application WPF avec C#, qui se joue à deux joueurs. Ils doivent
 - Il y a un certain temps entre chaque tir
 - Les joueurs ont trois vies
 - Un projectile est envoyé chez l'autre joueur quand il franchit le haut bord de l'écran
-- 
 
 ## Context
 Embrouille en pleine cité entre deux personnes. Les projectiles du jeu sont des objets se trouvant sur la voie publique (chaises, pierre, bouteilles).
