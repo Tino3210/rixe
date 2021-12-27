@@ -12,9 +12,9 @@ namespace Rixe
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainMenu : Window
     {
-        public MainWindow()
+        public MainMenu()
         {
             InitializeComponent();
             client.Click += btn1_Click;

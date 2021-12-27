@@ -82,6 +82,9 @@
     <Compile Include="Network\Server\Server.cs" />
 	<Compile Include="Settings.cs" />
     <Page Include="MainMenu.xaml">
+		<Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Game.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -92,6 +95,7 @@
     </Compile>
     <Compile Include="MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
+	</Compile>
     <Compile Include="Entity\Player.cs" />
     <Compile Include="Entity\Projectile.cs" />
     <Compile Include="Game.xaml.cs">

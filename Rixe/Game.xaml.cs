@@ -15,7 +15,7 @@ namespace Rixe
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Game : Window
     {
         private Player player;
 
@@ -23,7 +23,7 @@ namespace Rixe
         private List<Rectangle> itemRemover = new List<Rectangle>();
         private bool moveLeft, moveRight, moveUp, moveDown;        
 
-        public MainWindow()
+        public Game()
         {
             InitializeComponent();
 
