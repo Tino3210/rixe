@@ -1,5 +1,6 @@
 ﻿using Rixe.Entity;
 using Rixe.ModelView;
+using Rixe.Network;
 using Rixe.Network.Client;
 using Rixe.Tools;
 using System;
@@ -88,12 +89,12 @@ namespace Rixe
                 player.PlayerHitBox = new Rect(Canvas.GetLeft(MyPlayer), Canvas.GetTop(MyPlayer), MyPlayer.Width, MyPlayer.Height);
                 if (x is Rectangle && (string)x.Tag == "myProjectile")
                 {
-                    Canvas.SetTop(x, Canvas.GetTop(x) - Settings.PROJECTILE_SPEED);                    
+                    Canvas.SetTop(x, Canvas.GetTop(x) - Settings.PROJECTILE_SPEED);
 
                     if (Canvas.GetTop(x) + Settings.PROJECTILE_HEIGHT < 0)
                     {
                         itemRemover.Add(x);
-                        Client.GetInstance().Send(Serializable.RectToString(x));
+                        MyNetwork.GetInstance().Send(Serializable.RectToString(x));
                     }
                 }
                 if (x is Rectangle && (string)x.Tag == "Projectile")
