@@ -13,8 +13,10 @@ namespace Rixe.Entity
 {
     class Player
     {
-        public Rect PlayerHitBox { get; }
+        public Rect PlayerHitBox { get; set; }
         public Rectangle MyPlayer { get; }
+
+        public int Health { get; set; }
         
         public Player(Rectangle _MyPlayer)
         {
@@ -23,6 +25,7 @@ namespace Rixe.Entity
             _MyPlayer.Fill = playerImage;
             MyPlayer = _MyPlayer;
             PlayerHitBox = new Rect(Canvas.GetLeft(MyPlayer), Canvas.GetTop(MyPlayer), MyPlayer.Width, MyPlayer.Height);
+            Health = 3;
         }
 
         public void GoRight()
@@ -34,7 +37,7 @@ namespace Rixe.Entity
         }
 
         public void GoLeft()
-        {
+        {            
             if (Canvas.GetLeft(MyPlayer) > 0)
             {
                 Canvas.SetLeft(MyPlayer, Canvas.GetLeft(MyPlayer) - Settings.PLAYER_SPEED);
