@@ -13,6 +13,7 @@ namespace Rixe.Entity
     class Projectile
     {
         public string MyTag { get; set; }
+        public string MyName { get; }
         public Rectangle MyProjectile { get; }
         
         public Projectile(string _Tag, Rectangle _Player)
@@ -26,15 +27,18 @@ namespace Rixe.Entity
             if (rand.Next(0, 5) == 0)
             {
                 bg.ImageSource = molotov;
+                MyName = "molotov";
             }
             else
             {
                 bg.ImageSource = rock;
+                MyName = "rock";
             }            
             
             MyProjectile = new Rectangle
             {
                 Tag = _Tag,
+                Name = MyName,
                 Height = Settings.PROJECTILE_HEIGHT,
                 Width = Settings.PROJECTILE_WIDHT,
                 Fill = bg,

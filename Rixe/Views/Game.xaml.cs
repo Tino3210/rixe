@@ -88,11 +88,12 @@ namespace Rixe
                 player.PlayerHitBox = new Rect(Canvas.GetLeft(MyPlayer), Canvas.GetTop(MyPlayer), MyPlayer.Width, MyPlayer.Height);
                 if (x is Rectangle && (string)x.Tag == "myProjectile")
                 {
-                    Canvas.SetTop(x, Canvas.GetTop(x) - Settings.PROJECTILE_SPEED);                    
+                    Canvas.SetTop(x, Canvas.GetTop(x) - Settings.PROJECTILE_SPEED);
 
-                    if (Canvas.GetBottom(x) < 0)
+                    if (Canvas.GetTop(x) + Settings.PROJECTILE_HEIGHT < 0)
                     {
                         itemRemover.Add(x);
+                        //Client.GetInstance().Send(Serializable.RectToString(x));
                     }
                 }
                 if (x is Rectangle && (string)x.Tag == "Projectile")
@@ -118,7 +119,6 @@ namespace Rixe
                     if ((Canvas.GetTop(x) + x.Height) > Application.Current.MainWindow.Height)
                     {
                         itemRemover.Add(x);
-                        Client.GetInstance().Send(Serializable.RectToString(x));
                     }
                 }
             }

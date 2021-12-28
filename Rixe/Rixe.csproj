@@ -84,6 +84,7 @@
     <Compile Include="ModelView\IPageViewModel.cs" />
     <Compile Include="Network\Client\Client.cs" />
     <Compile Include="Network\Server\Server.cs" />
+    <Compile Include="Tools\Serializable.cs" />
     <Compile Include="Tools\Settings.cs" />
     <Page Include="MainMenu.xaml">
       <Generator>MSBuild:Compile</Generator>

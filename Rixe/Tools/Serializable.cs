@@ -14,14 +14,14 @@ namespace Rixe.Tools
     {
         public static string RectToString(Rectangle _rectangle)
         {
-            return Canvas.GetLeft(_rectangle) + ";" + _rectangle.Fill.ToString();
+            return Canvas.GetLeft(_rectangle) + ";" + _rectangle.Name;
         }
 
         public static Rectangle StringToRect(string msg)
         {
             string[] subs = msg.Split(';');
             ImageBrush bg = new ImageBrush();
-            BitmapImage molotov = new BitmapImage(new Uri("pack://application:,,,/images/molotov.png"));
+            BitmapImage molotov = new BitmapImage(new Uri("pack://application:,,,/images/"+ subs[1] +".png"));
             bg.ImageSource = molotov;
             
             return new Rectangle
