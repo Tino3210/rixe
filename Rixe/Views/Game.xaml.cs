@@ -1,4 +1,5 @@
 ﻿using Rixe.Entity;
+using Rixe.ModelView;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace Rixe
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
-    public partial class Game : Window
+    public partial class Game : Window, IPageViewModel
     {
         private Player player;
 

@@ -78,14 +78,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ModelView\AppViewModel.cs" />
+    <Compile Include="ModelView\BaseViewModel.cs" />
+    <Compile Include="ModelView\IPageViewModel.cs" />
     <Compile Include="Network\Client\Client.cs" />
     <Compile Include="Network\Server\Server.cs" />
-	<Compile Include="Settings.cs" />
+    <Compile Include="Settings.cs" />
     <Page Include="MainMenu.xaml">
-		<Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Game.xaml">
+    <Page Include="Views\Game.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -95,10 +98,11 @@
     </Compile>
     <Compile Include="MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
-	</Compile>
+    </Compile>
     <Compile Include="Entity\Player.cs" />
     <Compile Include="Entity\Projectile.cs" />
-    <Compile Include="Game.xaml.cs">
+    <Compile Include="Tools\Mediator.cs" />
+    <Compile Include="Views\Game.xaml.cs">
       <DependentUpon>Game.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -131,13 +135,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\1.png" />
-    <Resource Include="images\2.png" />
-    <Resource Include="images\3.png" />
-    <Resource Include="images\4.png" />
-    <Resource Include="images\5.png" />
-    <Resource Include="images\player.png" />
-    <Resource Include="images\purple.png" />
+    <Resource Include="Images\1.png" />
+    <Resource Include="Images\2.png" />
+    <Resource Include="Images\3.png" />
+    <Resource Include="Images\4.png" />
+    <Resource Include="Images\5.png" />
+    <Resource Include="Images\player.png" />
+    <Resource Include="Images\purple.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

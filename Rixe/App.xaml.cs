@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rixe.ModelView;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -16,10 +17,10 @@ namespace Rixe
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            WpfMVVMSample.MainMenu window = new MainMenu();
-            UserViewModel VM = new UserViewModel();
-            window.DataContext = VM;
-            window.Show();
+            MainMenu app = new MainMenu();
+            AppViewModel context = new AppViewModel();
+            app.DataContext = context;
+            app.Show();
         }
     }
 }

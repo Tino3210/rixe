@@ -1,4 +1,6 @@
-﻿using Rixe.Network.Client;
+﻿using Rixe.ModelView;
+using Rixe.Network.Client;
+using Rixe.Tools;
 using System;
 using System.Diagnostics;
 using System.Net;
@@ -12,7 +14,7 @@ namespace Rixe
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
-    public partial class MainMenu : Window
+    public partial class MainMenu : Window, IPageViewModel
     {
         public MainMenu()
         {
@@ -25,17 +27,21 @@ namespace Rixe
         {
             Trace.WriteLine("Client");
             Client.GetInstance().Send("HELLO");
+            Close();
+            new Game().Show();
         }
 
         private void btn2_Click(object sender, RoutedEventArgs e)
         {
             Trace.WriteLine("Server");
             Server.GetInstance();
+            Close();
+            new Game().Show();
         }
         private void btn3_Click(object sender, RoutedEventArgs e)
         {
-            Trace.WriteLine("Send message");
-            Client.GetInstance().Send("QUIT");
+            Close();
+            System.Windows.Application.Current.Shutdown();
         }
     }
 }
