@@ -13,6 +13,13 @@ namespace Rixe
     /// </summary>
     public partial class App : Application
     {
-
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            WpfMVVMSample.MainMenu window = new MainMenu();
+            UserViewModel VM = new UserViewModel();
+            window.DataContext = VM;
+            window.Show();
+        }
     }
 }
