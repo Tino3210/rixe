@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Entity\Player.cs" />
     <Compile Include="Settings.cs" />
     <Page Include="Game.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -64,7 +65,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Entity\Player.cs" />
     <Compile Include="Entity\Projectile.cs" />
     <Compile Include="Game.xaml.cs">
       <DependentUpon>Game.xaml</DependentUpon>
@@ -98,13 +98,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\1.png" />
-    <Resource Include="images\2.png" />
-    <Resource Include="images\3.png" />
-    <Resource Include="images\4.png" />
-    <Resource Include="images\5.png" />
+    <Resource Include="images\heart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\background.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="images\player.png" />
-    <Resource Include="images\purple.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\molotov.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\rock.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
