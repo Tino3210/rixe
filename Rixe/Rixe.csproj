@@ -78,13 +78,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Entity\Player.cs" />
     <Compile Include="ModelView\AppViewModel.cs" />
     <Compile Include="ModelView\BaseViewModel.cs" />
     <Compile Include="ModelView\IPageViewModel.cs" />
     <Compile Include="Network\Client\Client.cs" />
     <Compile Include="Network\Server\Server.cs" />
-    <Compile Include="Entity\Player.cs" />
-    <Compile Include="Settings.cs" />
+    <Compile Include="Tools\Settings.cs" />
     <Page Include="MainMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -100,7 +100,6 @@
     <Compile Include="MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Entity\Player.cs" />
     <Compile Include="Entity\Projectile.cs" />
     <Compile Include="Tools\Mediator.cs" />
     <Compile Include="Views\Game.xaml.cs">
