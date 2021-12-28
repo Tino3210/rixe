@@ -1,5 +1,7 @@
 ﻿using Rixe.Entity;
 using Rixe.ModelView;
+using Rixe.Network.Client;
+using Rixe.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -116,6 +118,7 @@ namespace Rixe
                     if ((Canvas.GetTop(x) + x.Height) > Application.Current.MainWindow.Height)
                     {
                         itemRemover.Add(x);
+                        Client.GetInstance().Send(Serializable.RectToString(x));
                     }
                 }
             }
