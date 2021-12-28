@@ -33,7 +33,7 @@ namespace Rixe.Network.Client
         {
             try
             {
-                this.localEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9050);
+                this.localEndPoint = new IPEndPoint(IPAddress.Parse("157.26.66.41"), 9050);
 
                 this.server = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
@@ -108,10 +108,11 @@ namespace Rixe.Network.Client
 
         private void Receive()
         {
+            IPEndPoint sender = new IPEndPoint(IPAddress.Any, 0);
+            EndPoint tmpRemote = (EndPoint)sender;
+
             while (this.server.Connected)
             {
-                IPEndPoint sender = new IPEndPoint(IPAddress.Any, 0);
-                EndPoint tmpRemote = (EndPoint)sender;
 
                 data = new byte[1024];
                 int recv = server.ReceiveFrom(data, ref tmpRemote);

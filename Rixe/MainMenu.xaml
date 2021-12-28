@@ -18,8 +18,9 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Button Name="server" Grid.Column="1" Grid.Row="0">Play as Host</Button>
-        <Button Name="client" Grid.Column="1" Grid.Row="1">Play as Guest</Button>
-        <Button Name="quit" Grid.Column="1" Grid.Row="3">Quit</Button>
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="100" FontWeight="Bold" Grid.Column="1" Grid.Row="0">Rixe</TextBlock>
+        <Button Name="server" Margin="30,20" Grid.Column="1" Grid.Row="1">Play as Host</Button>
+        <Button Name="client" Margin="30,20" Grid.Column="1" Grid.Row="2">Play as Guest</Button>
+        <Button Name="quit" Margin="30,20" Grid.Column="1" Grid.Row="3">Quit</Button>
     </Grid>
 </Window>

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Rixe
@@ -55,9 +56,13 @@ namespace Rixe
         {
             this.ipep = new IPEndPoint(IPAddress.Any, 9050);
             this.newsock = new UdpClient(ipep);
+
+            Thread thread = new Thread(Receive);
+            thread.Start();
+
         }
 
-        public void Start()
+        private void Receive()
         {
             // Using Listen() method we create
             // the Client list that will want
