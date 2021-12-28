@@ -6,17 +6,13 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using Rixe.Network;
 
-namespace Rixe.Network.Client
+namespace Rixe
 {
 
-    class Client
+    class Client : INetwork
     {
-
-
-        private static Client _instance;
-
-
         private const int dataBufferedSize = 4096;
 
         private IPEndPoint localEndPoint;
@@ -47,35 +43,6 @@ namespace Rixe.Network.Client
             }
         }
 
-        public static Client GetInstance()
-        {
-            // This conditional is needed to prevent threads stumbling over the
-            // lock once the instance is ready.
-            if (_instance == null)
-            {
-                // Now, imagine that the program has just been launched. Since
-                // there's no Singleton instance yet, multiple threads can
-                // simultaneously pass the previous conditional and reach this
-                // point almost at the same time. The first of them will acquire
-                // lock and will proceed further, while the rest will wait here.
-                lock (_lock)
-                {
-                    // The first thread to acquire the lock, reaches this
-                    // conditional, goes inside and creates the Singleton
-                    // instance. Once it leaves the lock block, a thread that
-                    // might have been waiting for the lock release may then
-                    // enter this section. But since the Singleton field is
-                    // already initialized, the thread won't create a new
-                    // object.
-                    if (_instance == null)
-                    {
-                        _instance = new Client();
-                    }
-                }
-            }
-            return _instance;
-        }
-
         public void Send(string _message)
         {
             try
@@ -83,10 +50,7 @@ namespace Rixe.Network.Client
                 byte[] data = new byte[dataBufferedSize];
                 data = Encoding.ASCII.GetBytes(_message);
                 server.SendTo(data, data.Length, SocketFlags.None, localEndPoint);
-
-
             }
-
             // Manage of Socket's Exceptions
             catch (ArgumentNullException ane)
             {
@@ -127,6 +91,5 @@ namespace Rixe.Network.Client
             Console.WriteLine("Stopping client");
             this.server.Shutdown(SocketShutdown.Both);
         }
-
     }
 }

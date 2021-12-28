@@ -1,4 +1,5 @@
 ﻿using Rixe.ModelView;
+using Rixe.Network;
 using Rixe.Network.Client;
 using Rixe.Tools;
 using System;
@@ -26,7 +27,7 @@ namespace Rixe
         private void btn1_Click(object sender, RoutedEventArgs e)
         {
             Trace.WriteLine("Client");
-            Client.GetInstance().Send("HELLO");
+            MyNetwork.GetInstance("Server");
             Close();
             new Game().Show();
         }
@@ -34,7 +35,7 @@ namespace Rixe
         private void btn2_Click(object sender, RoutedEventArgs e)
         {
             Trace.WriteLine("Server");
-            Server.GetInstance();
+            MyNetwork.GetInstance("Client");
             Close();
             new Game().Show();
         }
