@@ -17,7 +17,10 @@ namespace Rixe
         private static Server _instance;
 
         private IPEndPoint ipep;
+        private IPEndPoint sender;
         private UdpClient newsock;
+
+        private byte[] data;
 
         // We now have a lock object that will be used to synchronize threads
         // during first access to the Singleton.
@@ -57,6 +60,14 @@ namespace Rixe
             this.ipep = new IPEndPoint(IPAddress.Any, 9050);
             this.newsock = new UdpClient(ipep);
 
+            data = new byte[dataBufferedSize];
+
+            Console.WriteLine("Waiting for a client...");
+
+            sender = new IPEndPoint(IPAddress.Any, 9050);
+
+            data = newsock.Receive(ref sender);
+
             Thread thread = new Thread(Receive);
             thread.Start();
 
@@ -67,14 +78,6 @@ namespace Rixe
             // Using Listen() method we create
             // the Client list that will want
             // to connect to Server
-
-            byte[] data = new byte[dataBufferedSize];
-
-            Console.WriteLine("Waiting for a client...");
-
-            IPEndPoint sender = new IPEndPoint(IPAddress.Any, 9050);
-
-            data = newsock.Receive(ref sender);
 
             Console.WriteLine("Message received from {0}:", sender.ToString());
             Console.WriteLine(Encoding.ASCII.GetString(data, 0, data.Length));
