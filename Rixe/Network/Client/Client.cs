@@ -7,6 +7,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using Rixe.Network;
+using System.Windows.Shapes;
+using Rixe.Tools;
 
 namespace Rixe
 {
@@ -25,11 +27,13 @@ namespace Rixe
         // during first access to the Singleton.
         private static readonly object _lock = new object();
 
+        public event MyEventHandler eventSendProjectile;
+
         public Client()
         {
             try
             {
-                this.localEndPoint = new IPEndPoint(IPAddress.Parse("157.26.66.60"), 9050);
+                this.localEndPoint = new IPEndPoint(IPAddress.Parse("157.26.66.49"), 9050);
 
                 this.server = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
@@ -83,13 +87,21 @@ namespace Rixe
 
                 Console.WriteLine("Message received from {0}:", tmpRemote.ToString());
                 Console.WriteLine(Encoding.ASCII.GetString(data, 0, recv));
+                EventSendProjectile();
             }
         }
+
+
 
         public void Stop()
         {
             Console.WriteLine("Stopping client");
             this.server.Shutdown(SocketShutdown.Both);
+        }
+
+        public void EventSendProjectile()
+        {
+            eventSendProjectile(this, new ReceiveProjectileEvent() { newRectangle = Serializable.StringToRectangle(BitConverter.ToString(data)) });
         }
     }
 }

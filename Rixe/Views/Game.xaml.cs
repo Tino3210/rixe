@@ -33,6 +33,8 @@ namespace Rixe
         {
             InitializeComponent();
 
+            MyNetwork.GetInstance().eventSendProjectile += Receive;
+
             gameTimer.Tick += GameLoop;
             gameTimer.Interval = TimeSpan.FromMilliseconds(15);            
             gameTimer.Start();
@@ -93,7 +95,7 @@ namespace Rixe
                     if (Canvas.GetTop(x) + Settings.PROJECTILE_HEIGHT < 0)
                     {
                         itemRemover.Add(x);
-                        MyNetwork.GetInstance().Send(Serializable.RectToString(x));
+                        MyNetwork.GetInstance().Send(Serializable.RectangleToString(x));
                     }
                 }
                 if (x is Rectangle && (string)x.Tag == "Projectile")
@@ -186,6 +188,11 @@ namespace Rixe
                 cooldownProjectile.Start();
                 canShoot = false;
             }
+        }
+
+        public void Receive(object source, ReceiveProjectileEvent e)
+        {
+            Console.WriteLine("Game Receive : " + e.newRectangle.ToString());
         }
     }
 }

@@ -12,12 +12,12 @@ namespace Rixe.Tools
 {
     class Serializable
     {
-        public static string RectToString(Rectangle _rectangle)
+        public static string RectangleToString(Rectangle _rectangle)
         {
             return Canvas.GetLeft(_rectangle) + ";" + _rectangle.Name;
         }
 
-        public static Rectangle StringToRect(string msg)
+        public static Rectangle StringToRectangle(string msg)
         {
             string[] subs = msg.Split(';');
             ImageBrush bg = new ImageBrush();

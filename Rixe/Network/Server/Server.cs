@@ -25,6 +25,8 @@ namespace Rixe
         // during first access to the Singleton.
         private static readonly object _lock = new object();
 
+        public event MyEventHandler eventSendProjectile;
+
         public Server()
         {
             this.ipep = new IPEndPoint(IPAddress.Any, 9050);
