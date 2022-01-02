@@ -36,6 +36,9 @@ namespace Rixe
                 this.localEndPoint = new IPEndPoint(IPAddress.Parse("157.26.66.49"), 9050);
 
                 this.server = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+                Console.WriteLine("Receive");
+
+                Send("Connected");
 
                 Thread thread = new Thread(Receive);
                 thread.Start();
@@ -49,6 +52,7 @@ namespace Rixe
 
         public void Send(string _message)
         {
+            Console.WriteLine("Send");
             try
             {
                 byte[] data = new byte[dataBufferedSize];
