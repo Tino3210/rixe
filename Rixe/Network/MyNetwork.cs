@@ -1,5 +1,7 @@
 ﻿
 
+using System;
+
 namespace Rixe.Network
 {
     class MyNetwork
@@ -36,6 +38,7 @@ namespace Rixe.Network
                         }
                         else if (_network.Equals("Client"))
                         {
+                            Console.WriteLine("BITE");
                             _instance = new Client();
                         }
                             

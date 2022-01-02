@@ -21,10 +21,6 @@ namespace Rixe
 
         private byte[] data;
 
-        // We now have a lock object that will be used to synchronize threads
-        // during first access to the Singleton.
-        private static readonly object _lock = new object();
-
         public Server()
         {
             this.ipep = new IPEndPoint(IPAddress.Any, 9050);
