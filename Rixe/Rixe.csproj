@@ -78,10 +78,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Command\RelayCommand.cs" />
     <Compile Include="Entity\Player.cs" />
     <Compile Include="ModelView\AppViewModel.cs" />
     <Compile Include="ModelView\BaseViewModel.cs" />
     <Compile Include="ModelView\IPageViewModel.cs" />
+    <Compile Include="ModelView\MainMenuViewModel.cs" />
     <Compile Include="Network\Client\Client.cs" />
     <Compile Include="Network\INetwork.cs" />
     <Compile Include="Network\MyNetwork.cs" />
@@ -105,7 +107,6 @@
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Entity\Projectile.cs" />
-    <Compile Include="Tools\Mediator.cs" />
     <Compile Include="Views\Game.xaml.cs">
       <DependentUpon>Game.xaml</DependentUpon>
       <SubType>Code</SubType>

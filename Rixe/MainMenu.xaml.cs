@@ -2,6 +2,7 @@
 using Rixe.Network;
 using Rixe.Tools;
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
@@ -18,11 +19,15 @@ namespace Rixe
     {
         public MainMenu()
         {
+            DataContext = new MainMenuViewModel();
             InitializeComponent();
             client.Click += btn1_Click;
             server.Click += btn2_Click;
             quit.Click += btn3_Click;
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         private void btn1_Click(object sender, RoutedEventArgs e)
         {
             Trace.WriteLine("Client");
@@ -42,8 +47,8 @@ namespace Rixe
         }
         private void btn3_Click(object sender, RoutedEventArgs e)
         {
-            Close();
-            System.Windows.Application.Current.Shutdown();
+            //Close();
+            //System.Windows.Application.Current.Shutdown();
         }
     }
 }

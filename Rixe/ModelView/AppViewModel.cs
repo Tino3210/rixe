@@ -58,15 +58,7 @@ namespace Rixe.ModelView
         }
 
         public AppViewModel()
-        {
-            // Add available pages and set page
-            PageViewModels.Add(new MainMenu());
-            PageViewModels.Add(new Game());
-
-            CurrentPageViewModel = PageViewModels[0];
-
-            Mediator.Subscribe("GoToMenuScreen", OnGoMainScreen);
-            Mediator.Subscribe("GoToGameScreen", OnGoGameScreen);
+        {            
         }
     }
 }

@@ -18,9 +18,10 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Grid.Column="0" Grid.Row="0" Text="{Binding Capture}"></TextBlock>
         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="100" FontWeight="Bold" Grid.Column="1" Grid.Row="0">Rixe</TextBlock>
         <Button Name="server" Margin="30,20" Grid.Column="1" Grid.Row="1">Play as Host</Button>
         <Button Name="client" Margin="30,20" Grid.Column="1" Grid.Row="2">Play as Guest</Button>
-        <Button Name="quit" Margin="30,20" Grid.Column="1" Grid.Row="3">Quit</Button>
+        <Button Name="quit" Margin="30,20" Grid.Column="1" Grid.Row="3" Command="{Binding Test}" CommandParameter="{Binding}">Quit</Button>
     </Grid>
 </Window>
