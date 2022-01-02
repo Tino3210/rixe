@@ -27,16 +27,18 @@ namespace Rixe
         {
             Trace.WriteLine("Client");
             MyNetwork.GetInstance(MyNetwork.Type.Client);
-            Close();
             new Game().Show();
+            Close();
+
         }
 
         private void btn2_Click(object sender, RoutedEventArgs e)
         {
             Trace.WriteLine("Server");
             MyNetwork.GetInstance(MyNetwork.Type.Server);
-            Close();
             new Game().Show();
+            Close();
+
         }
         private void btn3_Click(object sender, RoutedEventArgs e)
         {

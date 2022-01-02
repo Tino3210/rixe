@@ -20,6 +20,7 @@ namespace Rixe.Tools
         public static Rectangle StringToRectangle(string msg)
         {
             string[] subs = msg.Split(';');
+            Console.WriteLine(msg);
             ImageBrush bg = new ImageBrush();
             BitmapImage molotov = new BitmapImage(new Uri("pack://application:,,,/images/"+ subs[1] +".png"));
             bg.ImageSource = molotov;

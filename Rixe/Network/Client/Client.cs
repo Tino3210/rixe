@@ -18,6 +18,8 @@ namespace Rixe
         private const int dataBufferedSize = 4096;
 
         private IPEndPoint localEndPoint;
+        private IPEndPoint sender;
+        private EndPoint tmpRemote;
 
         private Socket server;
 
@@ -33,11 +35,13 @@ namespace Rixe
         {
             try
             {
-                this.localEndPoint = new IPEndPoint(IPAddress.Parse("157.26.66.14"), 9050);
+                this.localEndPoint = new IPEndPoint(IPAddress.Parse("157.26.66.49"), 9050);
 
                 this.server = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
                 Console.WriteLine("Receive");
 
+                this.sender = new IPEndPoint(IPAddress.Any, 0);
+                this.tmpRemote = (EndPoint)sender;
                 Send("Connected");
 
                 Thread thread = new Thread(Receive);
@@ -79,18 +83,15 @@ namespace Rixe
 
         private void Receive()
         {
-            IPEndPoint sender = new IPEndPoint(IPAddress.Any, 0);
-            EndPoint tmpRemote = (EndPoint)sender;
 
             while (this.server.Connected)
             {
-
-                data = new byte[1024];
-                int recv = server.ReceiveFrom(data, ref tmpRemote);
+                int recv = server.Receive(data);
 
                 Console.WriteLine("Message received from {0}:", tmpRemote.ToString());
                 Console.WriteLine(Encoding.ASCII.GetString(data, 0, recv));
-                EventSendProjectile();
+    
+                EventSendProjectile(Encoding.ASCII.GetString(data, 0, data.Length));
             }
         }
 
@@ -102,9 +103,9 @@ namespace Rixe
             this.server.Shutdown(SocketShutdown.Both);
         }
 
-        public void EventSendProjectile()
+        public void EventSendProjectile(string message)
         {
-            eventSendProjectile(this, new ReceiveProjectileEvent() { newRectangle = Serializable.StringToRectangle(BitConverter.ToString(data)) });
+            eventSendProjectile(this, new ReceiveProjectileEvent() { newRectangle = Serializable.StringToRectangle(message) });
         }
     }
 }

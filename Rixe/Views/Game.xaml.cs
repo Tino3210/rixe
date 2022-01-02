@@ -33,6 +33,7 @@ namespace Rixe
         {
             InitializeComponent();
 
+            
             MyNetwork.GetInstance().eventSendProjectile += Receive;
 
             gameTimer.Tick += GameLoop;
@@ -123,12 +124,12 @@ namespace Rixe
                         itemRemover.Add(x);
                     }
                 }
-            }
+            }            
 
             foreach (Rectangle i in itemRemover)
             {
                 MyCanvas.Children.Remove(i);
-            }                      
+            }                     
         }
 
         private void OnKeyDown(object sender, KeyEventArgs e)
@@ -172,7 +173,19 @@ namespace Rixe
 
             if (e.Key == Key.Space && canShoot)
             {
-                Projectile newProjectile = new Projectile("myProjectile", MyPlayer);
+                Projectile newProjectile = new Projectile("myProjectile", MyPlayer);                
+                MyCanvas.Children.Add(newProjectile.MyProjectile);
+                cooldownProjectile.Start();
+                canShoot = false;
+            }
+        }
+
+        public void Receive(object source, ReceiveProjectileEvent e)
+        {
+            
+            Dispatcher.Invoke(() =>
+            {
+                Console.WriteLine("Game Receive : Object");
                 Rectangle rect = new Rectangle
                 {
                     Tag = "Projectile",
@@ -184,15 +197,7 @@ namespace Rixe
                 Canvas.SetLeft(rect, 50);
                 Canvas.SetTop(rect, 0);
                 MyCanvas.Children.Add(rect);
-                MyCanvas.Children.Add(newProjectile.MyProjectile);
-                cooldownProjectile.Start();
-                canShoot = false;
-            }
-        }
-
-        public void Receive(object source, ReceiveProjectileEvent e)
-        {
-            Console.WriteLine("Game Receive : " + e.newRectangle.ToString());
+            });
         }
     }
 }

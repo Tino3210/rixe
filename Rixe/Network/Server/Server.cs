@@ -42,6 +42,7 @@ namespace Rixe
             data = newsock.Receive(ref sender);
 
             Thread thread = new Thread(Receive);
+            thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
 
         }
@@ -64,10 +65,10 @@ namespace Rixe
             {
                 data = newsock.Receive(ref sender);
 
-                Console.WriteLine(Encoding.ASCII.GetString(data, 0, data.Length));
-                newsock.Send(data, data.Length, sender);
+                Console.WriteLine("Serveur à reçu : "  + Encoding.ASCII.GetString(data, 0, data.Length));
+                //newsock.Send(data, data.Length, sender);
 
-                EventSendProjectile();
+                EventSendProjectile(Encoding.ASCII.GetString(data, 0, data.Length));
             }
         }
 
@@ -77,9 +78,9 @@ namespace Rixe
             newsock.Send(data, data.Length, sender);
         }
 
-        public void EventSendProjectile()
+        public void EventSendProjectile(string message)
         {
-            eventSendProjectile(this, new ReceiveProjectileEvent() { newRectangle = Serializable.StringToRectangle(BitConverter.ToString(data)) });
+            eventSendProjectile(this, new ReceiveProjectileEvent() { newRectangle = Serializable.StringToRectangle(message) });
         }
     }
 }
