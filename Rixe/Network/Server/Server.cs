@@ -1,4 +1,5 @@
 ﻿using Rixe.Network;
+using Rixe.Tools;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -65,6 +66,8 @@ namespace Rixe
 
                 Console.WriteLine(Encoding.ASCII.GetString(data, 0, data.Length));
                 newsock.Send(data, data.Length, sender);
+
+                EventSendProjectile();
             }
         }
 
@@ -72,6 +75,11 @@ namespace Rixe
         {
             data = Encoding.ASCII.GetBytes(_message);
             newsock.Send(data, data.Length, sender);
+        }
+
+        public void EventSendProjectile()
+        {
+            eventSendProjectile(this, new ReceiveProjectileEvent() { newRectangle = Serializable.StringToRectangle(BitConverter.ToString(data)) });
         }
     }
 }

@@ -1,21 +1,29 @@
-﻿
-
-using System;
+﻿using System;
 
 namespace Rixe.Network
 {
+
+    
+
     class MyNetwork
     {
+        public enum Type
+        {
+            Client,
+            Server
+        }
 
         private static INetwork _instance;
 
         private static readonly object _lock = new object();
-        public static INetwork GetInstance(string _network)
+        public static INetwork GetInstance(Type type)
         {
+            Console.WriteLine(_instance);
             // This conditional is needed to prevent threads stumbling over the
             // lock once the instance is ready.
             if (_instance == null)
             {
+                Console.WriteLine("HELLO1");
                 // Now, imagine that the program has just been launched. Since
                 // there's no Singleton instance yet, multiple threads can
                 // simultaneously pass the previous conditional and reach this
@@ -32,13 +40,15 @@ namespace Rixe.Network
                     // object.
                     if (_instance == null)
                     {
-                        if (_network.Equals("Server"))
+                        Console.WriteLine("HELLO2");
+                        if (type == Type.Server)
                         {
+                            Console.WriteLine("HELLO3");
                             _instance = new Server();
                         }
-                        else if (_network.Equals("Client"))
+                        else if (type == Type.Client)
                         {
-                            Console.WriteLine("BITE");
+                            Console.WriteLine("HELLO4");
                             _instance = new Client();
                         }
                             
@@ -50,6 +60,7 @@ namespace Rixe.Network
 
         public static INetwork GetInstance()
         {
+            Console.WriteLine(_instance);
             // This conditional is needed to prevent threads stumbling over the
             // lock once the instance is ready.
             if (_instance == null)

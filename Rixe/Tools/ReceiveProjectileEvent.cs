@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Shapes;
 
-namespace Rixe
+namespace Rixe.Tools
 {
     public class ReceiveProjectileEvent: EventArgs
     {

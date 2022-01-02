@@ -14,13 +14,6 @@ namespace Rixe
     /// </summary>
     public partial class App : Application
     {
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            base.OnStartup(e);
-            MainMenu app = new MainMenu();
-            AppViewModel context = new AppViewModel();
-            app.DataContext = context;
-            app.Show();
-        }
+        
     }
 }

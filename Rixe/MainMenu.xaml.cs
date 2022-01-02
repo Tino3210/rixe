@@ -26,7 +26,7 @@ namespace Rixe
         private void btn1_Click(object sender, RoutedEventArgs e)
         {
             Trace.WriteLine("Client");
-            MyNetwork.GetInstance("Client");
+            MyNetwork.GetInstance(MyNetwork.Type.Client);
             Close();
             new Game().Show();
         }
@@ -34,7 +34,7 @@ namespace Rixe
         private void btn2_Click(object sender, RoutedEventArgs e)
         {
             Trace.WriteLine("Server");
-            MyNetwork.GetInstance("Server");
+            MyNetwork.GetInstance(MyNetwork.Type.Server);
             Close();
             new Game().Show();
         }
