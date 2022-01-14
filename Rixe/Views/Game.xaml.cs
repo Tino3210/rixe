@@ -119,7 +119,7 @@ namespace Rixe
                         }
                         hearts[player.Health].Visibility = Visibility.Hidden;
                     }                    
-                    if ((Canvas.GetTop(x) + x.Height) > Application.Current.MainWindow.Height)
+                    if ((Canvas.GetTop(x) + x.Height) > Settings.APP_HEIGHT)
                     {
                         itemRemover.Add(x);
                     }
@@ -129,7 +129,7 @@ namespace Rixe
             foreach (Rectangle i in itemRemover)
             {
                 MyCanvas.Children.Remove(i);
-            }                     
+            }                   
         }
 
         private void OnKeyDown(object sender, KeyEventArgs e)

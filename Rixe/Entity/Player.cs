@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Rixe.Tools;
 
 namespace Rixe.Entity
 {
@@ -30,7 +31,7 @@ namespace Rixe.Entity
 
         public void GoRight()
         {
-            if (Canvas.GetLeft(MyPlayer) + MyPlayer.Width < Application.Current.MainWindow.Width)
+            if (Canvas.GetLeft(MyPlayer) + MyPlayer.Width < Settings.APP_WIDTH)
             {
                 Canvas.SetLeft(MyPlayer, Canvas.GetLeft(MyPlayer) + Settings.PLAYER_SPEED);
             }
@@ -54,7 +55,7 @@ namespace Rixe.Entity
 
         public void GoDown()
         {
-            if (Canvas.GetTop(MyPlayer) + MyPlayer.Height < Application.Current.MainWindow.Height)
+            if (Canvas.GetTop(MyPlayer) + MyPlayer.Height < Settings.APP_HEIGHT)
             {
                 Canvas.SetTop(MyPlayer, Canvas.GetTop(MyPlayer) + Settings.PLAYER_SPEED);
             }
