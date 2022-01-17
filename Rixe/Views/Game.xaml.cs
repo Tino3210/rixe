@@ -19,7 +19,7 @@ namespace Rixe
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
-    public partial class Game : Window, IPageViewModel
+    public partial class Game : Window
     {
         private Player player;
 
