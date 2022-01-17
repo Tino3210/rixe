@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -17,7 +19,14 @@ namespace Rixe.ModelView
         public ICommand _test;
         public MainMenuViewModel()
         {
-            _captured = "Hello ça marche";
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    _captured = ip.ToString();
+                }
+            }
         }
 
         public string Capture
@@ -37,7 +46,7 @@ namespace Rixe.ModelView
             {
                 return _test ?? (_test = new RelayCommand(x =>
                 {
-                    Capture = "plutôt bien";
+                    
                 }));
             }
         }

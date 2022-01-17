@@ -35,7 +35,7 @@ namespace Rixe
         {
             try
             {
-                this.localEndPoint = new IPEndPoint(IPAddress.Parse("157.26.66.49"), 9050);
+                this.localEndPoint = new IPEndPoint(IPAddress.Parse("157.26.105.37"), 9050);
 
                 this.server = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
                 Console.WriteLine("Receive");
