@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:Rixe"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Rixe" ResizeMode="NoResize" Height="800" Width="550">
+        Title="Rixe" ResizeMode="NoResize" Height="800" Width="600">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -22,9 +22,9 @@
         </Grid.RowDefinitions>
         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="100" FontWeight="Bold" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">Rixe</TextBlock>
         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Grid.Column="0" Grid.Row="1" Text="{Binding MyIP}"></TextBlock>
-        <Button Name="Server" Margin="30,20" FontSize="30" Grid.Column="1" Grid.Row="1" Command="{Binding PlayHost}" CommandParameter="{Binding ElementName=StartMenu}">Play as Host</Button>
-        <TextBox Name="InputIp" TextAlignment="Center" Margin="20,50" FontSize="20" Grid.Column="0" Grid.Row="2" Text="{Binding InputIP, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-        <Button Name="Client" Margin="30,20" FontSize="30" Grid.Column="1" Grid.Row="2" Command="{Binding PlayGuest}" CommandParameter="{Binding ElementName=StartMenu}">Play as Guest</Button>
+        <Button Name="Server" Margin="30,20" FontSize="30" Grid.Column="1" Grid.Row="1" Command="{Binding StartHost}" CommandParameter="{Binding ElementName=StartMenu}">Play as Host</Button>
+        <TextBox Name="InputIp" TextAlignment="Center" Margin="20,50" FontSize="20" FontWeight="Bold" Grid.Column="0" Grid.Row="2" Text="{Binding InputIP, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+        <Button Name="Client" Margin="30,20" FontSize="30" Grid.Column="1" Grid.Row="2" Command="{Binding StartGuest}" CommandParameter="{Binding ElementName=StartMenu}">Play as Guest</Button>
         <Button Name="Quit" Margin="30,20" FontSize="30" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Command="{Binding Quit}" CommandParameter="{Binding ElementName=StartMenu}">Quit</Button>
     </Grid>
 </Window>

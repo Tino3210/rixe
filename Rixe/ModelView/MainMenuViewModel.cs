@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -27,14 +28,15 @@ namespace Rixe.ModelView
         public MainMenuViewModel()
         {
             var host = Dns.GetHostEntry(Dns.GetHostName());
-            foreach (var ip in host.AddressList)
+            var address = new List<string>();
+            foreach (IPAddress ip in host.AddressList)
             {
-                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                if (ip.AddressFamily == AddressFamily.InterNetwork && new Regex("^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$").Match(ip.ToString()).Success)
                 {
-                    _myIP = ip.ToString();
+                    address.Add(ip.ToString());
                 }
             }
-            InputIP = "hello";
+            _myIP = String.Join("\n", address.ToArray());
         }
 
         public string MyIP
@@ -65,8 +67,8 @@ namespace Rixe.ModelView
             {
                 return _startHost ?? (_startHost = new RelayCommand(x =>
                 {
-                    Console.WriteLine("Server");
-                    MyNetwork.GetInstance(MyNetwork.Type.Server);
+                    MyIP = "Server";
+                    MyNetwork.GetInstance(MyNetwork.Type.Server, _inputIP);
                     new Game().Show();
                     ((Window)x).Close();
 
@@ -80,8 +82,8 @@ namespace Rixe.ModelView
             {
                 return _startGuest ?? (_startGuest = new RelayCommand(x =>
                 {
-                    Console.WriteLine("Client");
-                    MyNetwork.GetInstance(MyNetwork.Type.Client);
+                    MyIP = "Client";
+                    MyNetwork.GetInstance(MyNetwork.Type.Client,_inputIP);
                     new Game().Show();
                     ((Window)x).Close();
                 }));
@@ -93,7 +95,6 @@ namespace Rixe.ModelView
             {
                 return _quit ?? (_quit = new RelayCommand(x =>
                 {
-                    Console.WriteLine("CLOSING");
                     ((Window)x).Close();
                     Application.Current.Shutdown();
                 }));
