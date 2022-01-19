@@ -55,7 +55,8 @@ namespace Rixe.Entity
 
         public void GoDown()
         {
-            if (Canvas.GetTop(MyPlayer) + MyPlayer.Height < Settings.APP_HEIGHT)
+            Console.WriteLine(Canvas.GetTop(MyPlayer) + MyPlayer.Height + " : " + Settings.APP_HEIGHT);            
+            if ((Canvas.GetTop(MyPlayer) + MyPlayer.Height) < Settings.APP_HEIGHT)
             {
                 Canvas.SetTop(MyPlayer, Canvas.GetTop(MyPlayer) + Settings.PLAYER_SPEED);
             }
