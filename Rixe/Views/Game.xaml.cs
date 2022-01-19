@@ -102,7 +102,6 @@ namespace Rixe
                 if (x is Rectangle && (string)x.Tag == "Projectile")
                 {
                     Canvas.SetTop(x, Canvas.GetTop(x) + Settings.PROJECTILE_SPEED);
-                    Console.WriteLine("deplacement");
                     Rect projectilleHitBox = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
                     
                     if (player.PlayerHitBox.IntersectsWith(projectilleHitBox))
@@ -112,7 +111,6 @@ namespace Rixe
                         if(player.Health == 0)
                         {
                             hearts[player.Health].Visibility = Visibility.Hidden;
-                            Console.WriteLine("Fin du Game");
                             MessageBoxResult result = MessageBox.Show("Vous avez perdu !\n Voulez-vous faire une nouvelle partie", "Rixe", MessageBoxButton.YesNo);
                             switch (result)
                             {
@@ -191,7 +189,7 @@ namespace Rixe
         }
 
         public void Receive(object source, ReceiveProjectileEvent e)
-        {           
+        {
             Dispatcher.Invoke(() =>
             {
                 Rectangle rect = Serializable.StringToRectangle(e.Rectangle);

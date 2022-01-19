@@ -54,13 +54,6 @@ namespace Rixe
             // the Client list that will want
             // to connect to Server
 
-            Console.WriteLine("Message received from {0}:", sender.ToString());
-            Console.WriteLine(Encoding.ASCII.GetString(data, 0, data.Length));
-
-            string welcome = "Welcome to my test server";
-            data = Encoding.ASCII.GetBytes(welcome);
-            newsock.Send(data, data.Length, sender);
-
             while (true)
             {
                 data = newsock.Receive(ref sender);

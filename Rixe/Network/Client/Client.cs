@@ -37,7 +37,8 @@ namespace Rixe
                 this.localEndPoint = new IPEndPoint(IPAddress.Parse(serverIP), 9050);
 
                 this.server = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-                Console.WriteLine("Receive");
+
+                data = new byte[dataBufferedSize];
 
                 this.sender = new IPEndPoint(IPAddress.Any, 0);
                 this.tmpRemote = (EndPoint)sender;
@@ -83,18 +84,16 @@ namespace Rixe
         private void Receive()
         {
 
-            while (this.server.Connected)
+            while (true)
             {
-                int recv = server.Receive(data);
+                int recv = server.ReceiveFrom(data, ref tmpRemote);
 
-                Console.WriteLine("Message received from {0}:", tmpRemote.ToString());
-                Console.WriteLine(Encoding.ASCII.GetString(data, 0, recv));
-    
-                EventSendProjectile(Encoding.ASCII.GetString(data, 0, data.Length));
+                //Console.WriteLine("Message received from {0}:", tmpRemote.ToString());
+                //Console.WriteLine(Encoding.ASCII.GetString(data, 0, recv));
+
+                EventSendProjectile(Encoding.ASCII.GetString(data, 0, recv));
             }
         }
-
-
 
         public void Stop()
         {
