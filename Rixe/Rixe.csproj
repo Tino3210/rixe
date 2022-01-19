@@ -88,6 +88,7 @@
     <Compile Include="Network\MyNetwork.cs" />
     <Compile Include="Network\Server\Server.cs" />
     <Compile Include="Tools\ReceiveProjectileEvent.cs" />
+    <Compile Include="Tools\ReceiveWinEvent.cs" />
     <Compile Include="Tools\Serializable.cs" />
     <Compile Include="Tools\Settings.cs" />
     <Page Include="Views\MainMenu.xaml">

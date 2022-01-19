@@ -35,6 +35,7 @@ namespace Rixe
 
             
             MyNetwork.GetInstance().eventSendProjectile += Receive;
+            MyNetwork.GetInstance().eventSendWin += Victory;
 
             gameTimer.Tick += GameLoop;
             gameTimer.Interval = TimeSpan.FromMilliseconds(15);            
@@ -111,6 +112,7 @@ namespace Rixe
                         if(player.Health == 0)
                         {
                             hearts[player.Health].Visibility = Visibility.Hidden;
+                            MyNetwork.GetInstance().Send("win");
                             MessageBoxResult result = MessageBox.Show("Vous avez perdu !\n Voulez-vous faire une nouvelle partie", "Rixe", MessageBoxButton.YesNo);
                             switch (result)
                             {
@@ -119,7 +121,7 @@ namespace Rixe
                                     break;
                                 case MessageBoxResult.No:
                                     Application.Current.Shutdown();
-                                    break;                                
+                                    break;
                             }
                         }
                         else
@@ -195,6 +197,20 @@ namespace Rixe
                 Rectangle rect = Serializable.StringToRectangle(e.Rectangle);
                 MyCanvas.Children.Add(rect);
             });
+        }
+
+        public void Victory(object source, ReceiveWinEvent e)
+        {
+            MessageBoxResult result = MessageBox.Show("Vous avez Gagné !\n Voulez-vous faire une nouvelle partie", "Rixe", MessageBoxButton.YesNo);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    MessageBox.Show("Hello to you too!", "My App");
+                    break;
+                case MessageBoxResult.No:
+                    Application.Current.Shutdown();
+                    break;
+            }
         }
     }
 }

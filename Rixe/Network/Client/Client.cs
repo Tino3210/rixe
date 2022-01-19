@@ -30,6 +30,8 @@ namespace Rixe
         private static readonly object _lock = new object();
 
         public event MyEventHandler eventSendProjectile;
+        public event MyEventHandler1 eventSendWin;
+
         public Client(string serverIP)
         {
             try
@@ -91,7 +93,16 @@ namespace Rixe
                 //Console.WriteLine("Message received from {0}:", tmpRemote.ToString());
                 //Console.WriteLine(Encoding.ASCII.GetString(data, 0, recv));
 
-                EventSendProjectile(Encoding.ASCII.GetString(data, 0, recv));
+                string message = Encoding.ASCII.GetString(data, 0, recv);
+
+                if (message == "win")
+                {
+                    EventSendWin();
+                }
+                else
+                {
+                    EventSendProjectile(message);
+                }
             }
         }
 
@@ -104,6 +115,10 @@ namespace Rixe
         public void EventSendProjectile(string message)
         {
             eventSendProjectile(this, new ReceiveProjectileEvent() { Rectangle = message });
+        }
+        public void EventSendWin()
+        {
+            eventSendWin(this, new ReceiveWinEvent());
         }
     }
 }
