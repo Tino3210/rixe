@@ -5,6 +5,23 @@ namespace Rixe.Tools
 {
     public class ReceiveProjectileEvent: EventArgs
     {
-        public Rectangle newRectangle { get; set; }
+        private static object syncObj = new object();
+        private static string rectangleStr;
+        public string Rectangle {
+            get
+            {
+                lock (syncObj)
+                {
+                    return rectangleStr;
+                }
+            }
+            set
+            {
+                lock (syncObj)
+                {
+                    rectangleStr = value;
+                }
+            }
+        }
     }
 }

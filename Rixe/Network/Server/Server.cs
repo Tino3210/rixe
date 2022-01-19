@@ -80,7 +80,7 @@ namespace Rixe
 
         public void EventSendProjectile(string message)
         {
-            eventSendProjectile(this, new ReceiveProjectileEvent() { newRectangle = Serializable.StringToRectangle(message) });
+            eventSendProjectile(this, new ReceiveProjectileEvent() { Rectangle = message});
         }
     }
 }

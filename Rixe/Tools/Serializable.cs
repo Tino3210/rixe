@@ -25,13 +25,18 @@ namespace Rixe.Tools
             BitmapImage molotov = new BitmapImage(new Uri("pack://application:,,,/images/"+ subs[1] +".png"));
             bg.ImageSource = molotov;
             
-            return new Rectangle
+            Rectangle rectangle = new Rectangle
             {
-                Tag = "Projectille",
+                Tag = "Projectile",
                 Height = Settings.PROJECTILE_HEIGHT,
                 Width = Settings.PROJECTILE_WIDHT,
                 Fill = bg,
             };
+
+            Canvas.SetLeft(rectangle, int.Parse(subs[0]));
+            Canvas.SetTop(rectangle, 0);
+
+            return rectangle;
         }
     }
 }
