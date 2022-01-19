@@ -102,22 +102,32 @@ namespace Rixe
                 if (x is Rectangle && (string)x.Tag == "Projectile")
                 {
                     Canvas.SetTop(x, Canvas.GetTop(x) + Settings.PROJECTILE_SPEED);
-
+                    Console.WriteLine("deplacement");
                     Rect projectilleHitBox = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
                     
                     if (player.PlayerHitBox.IntersectsWith(projectilleHitBox))
                     {                   
                         itemRemover.Add(x);
                         player.Health -= 1;                        
-                        if(player.Health < 0)
+                        if(player.Health == 0)
                         {
+                            hearts[player.Health].Visibility = Visibility.Hidden;
                             Console.WriteLine("Fin du Game");
-                            player.Health = 3;
-                            hearts[0].Visibility = Visibility.Visible;
-                            hearts[1].Visibility = Visibility.Visible;
-                            hearts[2].Visibility = Visibility.Visible;
+                            MessageBoxResult result = MessageBox.Show("Vous avez perdu !\n Voulez-vous faire une nouvelle partie", "Rixe", MessageBoxButton.YesNo);
+                            switch (result)
+                            {
+                                case MessageBoxResult.Yes:
+                                    MessageBox.Show("Hello to you too!", "My App");
+                                    break;
+                                case MessageBoxResult.No:
+                                    Application.Current.Shutdown();
+                                    break;                                
+                            }
                         }
-                        hearts[player.Health].Visibility = Visibility.Hidden;
+                        else
+                        {
+                            hearts[player.Health].Visibility = Visibility.Hidden;
+                        }                        
                     }                    
                     if ((Canvas.GetTop(x) + x.Height) > Settings.APP_HEIGHT)
                     {
@@ -181,21 +191,10 @@ namespace Rixe
         }
 
         public void Receive(object source, ReceiveProjectileEvent e)
-        {
-            
+        {           
             Dispatcher.Invoke(() =>
             {
-                Console.WriteLine("Game Receive : Object");
-                Rectangle rect = new Rectangle
-                {
-                    Tag = "Projectile",
-                    Height = Settings.PROJECTILE_HEIGHT,
-                    Width = Settings.PROJECTILE_WIDHT,
-                    Fill = Brushes.Yellow,
-                    Stroke = Brushes.Wheat
-                };
-                Canvas.SetLeft(rect, 50);
-                Canvas.SetTop(rect, 0);
+                Rectangle rect = Serializable.StringToRectangle(e.Rectangle);
                 MyCanvas.Children.Add(rect);
             });
         }

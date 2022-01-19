@@ -35,7 +35,7 @@ namespace Rixe
         {
             try
             {
-                this.localEndPoint = new IPEndPoint(IPAddress.Parse("157.26.104.212"), 9050);
+                this.localEndPoint = new IPEndPoint(IPAddress.Parse("157.26.66.65"), 9050);
 
                 this.server = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
                 Console.WriteLine("Receive");
@@ -105,7 +105,7 @@ namespace Rixe
 
         public void EventSendProjectile(string message)
         {
-            eventSendProjectile(this, new ReceiveProjectileEvent() { newRectangle = Serializable.StringToRectangle(message) });
+            eventSendProjectile(this, new ReceiveProjectileEvent() { Rectangle = message });
         }
     }
 }
