@@ -33,7 +33,7 @@ namespace Rixe.Tools
                 Fill = bg,
             };
 
-            Canvas.SetLeft(rectangle, int.Parse(subs[0]));
+            Canvas.SetLeft(rectangle, double.Parse(subs[0]));
             Canvas.SetTop(rectangle, 0);
 
             return rectangle;

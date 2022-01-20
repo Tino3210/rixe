@@ -83,7 +83,7 @@ namespace Rixe
         }
 
         public void EventSendProjectile(string message)
-        {
+        {            
             eventSendProjectile(this, new ReceiveProjectileEvent() { Rectangle = message});
         }
         public void EventSendWin()
