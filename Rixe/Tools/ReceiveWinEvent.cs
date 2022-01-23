@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Rixe.Tools
 {
+
+    /// <summary>
+    /// Event to trigger the win
+    /// </summary>
     public class ReceiveWinEvent : EventArgs
     {
     }

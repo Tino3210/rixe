@@ -11,12 +11,23 @@ using System.Windows.Shapes;
 
 namespace Rixe.Entity
 {
+    /// <summary>
+    /// Projectile class 
+    /// </summary>
     class Projectile
     {
+        //Tag the user
         public string MyTag { get; set; }
+        //Tag the name
         public string MyName { get; }
+        //The rectangle
         public Rectangle MyProjectile { get; }
-        
+
+        /// <summary>
+        /// Constructor for the player 
+        /// </summary>
+        /// <param name="_Tag">The tag</param> 
+        /// <param name="_Player">Rectangle</param>        
         public Projectile(string _Tag, Rectangle _Player)
         {
             MyTag = _Tag;
@@ -25,6 +36,7 @@ namespace Rixe.Entity
             BitmapImage rock = new BitmapImage(new Uri("pack://application:,,,/images/rock.png"));
             var rand = new Random();
             
+            //Rand to choose between the rock and the molotov
             if (rand.Next(0, 5) == 0)
             {
                 bg.ImageSource = molotov;
@@ -36,6 +48,7 @@ namespace Rixe.Entity
                 MyName = "rock";
             }            
             
+            //Create the rectangle
             MyProjectile = new Rectangle
             {
                 Tag = _Tag,
@@ -44,7 +57,8 @@ namespace Rixe.Entity
                 Width = Settings.PROJECTILE_WIDHT,
                 Fill = bg,
             };
-            Canvas.SetLeft(MyProjectile, Canvas.GetLeft(_Player) + _Player.Width / 2);
+            //Set the position
+            Canvas.SetLeft(MyProjectile, (Canvas.GetLeft(_Player) + _Player.Width / 2) - Settings.PROJECTILE_WIDHT/2);
             Canvas.SetTop(MyProjectile, Canvas.GetTop(_Player) - MyProjectile.Height);
         }
     }
