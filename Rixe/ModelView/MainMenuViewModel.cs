@@ -16,6 +16,9 @@ using System.Windows.Input;
 
 namespace Rixe.ModelView
 {
+    /// <summary>
+    /// ModelView of Main Menu
+    /// </summary>
     class MainMenuViewModel : INotifyPropertyChanged
     {
         private string _myIP;
@@ -25,9 +28,14 @@ namespace Rixe.ModelView
         public ICommand _startGuest;
         public ICommand _quit;
 
+        /// <summary>
+        /// Constructor for the Main Menu ViewModel
+        /// </summary>
         public MainMenuViewModel()
         {
+            // Get all address IP
             var host = Dns.GetHostEntry(Dns.GetHostName());
+            // List of IP address
             var address = new List<string>();
             foreach (IPAddress ip in host.AddressList)
             {
@@ -36,9 +44,10 @@ namespace Rixe.ModelView
                     address.Add(ip.ToString());
                 }
             }
+            // Join all IP address
             _myIP = String.Join("\n", address.ToArray());
         }
-
+        
         public string MyIP
         {
             get { return _myIP; }
@@ -60,7 +69,10 @@ namespace Rixe.ModelView
                 OnPropertyChanged("InputIP");
             }
         }
-
+        
+        /// <summary>
+        /// Command to start a game as a Host
+        /// </summary>
         public ICommand StartHost
         {
             get
@@ -76,6 +88,9 @@ namespace Rixe.ModelView
             }
         }
 
+        /// <summary>
+        /// Command to start a game as a Guest 
+        /// </summary>
         public ICommand StartGuest
         {
             get
@@ -89,6 +104,10 @@ namespace Rixe.ModelView
                 }));
             }
         }
+
+        /// <summary>
+        /// Command to quit the application
+        /// </summary>
         public ICommand Quit
         {
             get
@@ -103,6 +122,10 @@ namespace Rixe.ModelView
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// update the binding info
+        /// </summary>
+        /// <param name="propertyName">The binding to update</param>
         protected void OnPropertyChanged(string propertyName)
         {
             VerifyPropertyName(propertyName);

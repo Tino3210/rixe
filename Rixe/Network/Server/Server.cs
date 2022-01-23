@@ -12,80 +12,122 @@ using System.Threading.Tasks;
 
 namespace Rixe
 {
+    /// <summary>
+    /// Server is use when the user host the game
+    /// Implement INetwork
+    /// </summary>
     class Server : INetwork
     {
+        //Size of the buffer use to stock the data receive
         private const int dataBufferedSize = 4096;
 
+        //Contains th IP adresse
         private IPEndPoint ipep;
         private IPEndPoint sender;
+
+        //Provide the UDP service
         private UdpClient newsock;
 
+        //The reveive data
         private byte[] data;
+        private Thread thread;
+        private bool isAlive;
 
-        // We now have a lock object that will be used to synchronize threads
-        // during first access to the Singleton.
+        //A lock use for Threads
         private static readonly object _lock = new object();
 
+        //Event use to notify the game
         public event MyEventHandler eventSendProjectile;
         public event MyEventHandler1 eventSendWin;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public Server()
         {
+            //Init connection
             this.ipep = new IPEndPoint(IPAddress.Any, 9050);
+            //Init the sock UDP
             this.newsock = new UdpClient(ipep);
 
+            //Init the data with the buffered size
             data = new byte[dataBufferedSize];
 
-            Console.WriteLine("Waiting for a client...");
-
+            //Init connection
             sender = new IPEndPoint(IPAddress.Any, 9050);
 
+            //Wait a message from the client
             data = newsock.Receive(ref sender);
 
-            Thread thread = new Thread(Receive);
-            thread.SetApartmentState(ApartmentState.STA);
-            thread.Start();
-
+            //Thread of the connection
+            this.isAlive = true;
+            this.thread = new Thread(Receive);
+            this.thread.SetApartmentState(ApartmentState.STA);
+            this.thread.Start();
         }
 
-        
+
+        /// <summary>
+        /// Receive method is using to recive the messages of the client
+        /// </summary>
         private void Receive()
         {
-            // Using Listen() method we create
-            // the Client list that will want
-            // to connect to Server
-
-            while (true)
+            while (isAlive)
             {
-                data = newsock.Receive(ref sender);
-
-                Console.WriteLine("Serveur à reçu : "  + Encoding.ASCII.GetString(data, 0, data.Length));
-                //newsock.Send(data, data.Length, sender);
-
-                string message = Encoding.ASCII.GetString(data, 0, data.Length);
-
-                if (message == "win")
+                try
                 {
-                    EventSendWin();
-                }
-                else
-                {
-                    EventSendProjectile(message);
-                }
+                    //Wait to have a message
+                    data = newsock.Receive(ref sender);
 
+                    //Transfonm to string
+                    string message = Encoding.ASCII.GetString(data, 0, data.Length);
+
+                    if (message == "win")
+                    {
+                        EventSendWin(); //Send a win to the game
+                    }
+                    else
+                    {
+                        EventSendProjectile(message); //Send a projectille to the game
+                    }
+                }
+                catch
+                {
+
+                }
+                
             }
         }
 
+        /// <summary>
+        /// Use to send message to the client
+        /// </summary>
+        /// <param name="_message"></param>
         public void Send(string _message)
         {
             data = Encoding.ASCII.GetBytes(_message);
+            //Send the message
             newsock.Send(data, data.Length, sender);
         }
 
+        public void Stop()
+        {
+            isAlive = false;
+            newsock.Close();
+        }
+
+        /// <summary>
+        /// Notify the game that the client send a projectille
+        /// </summary>
+        /// <param name="message"></param>
         public void EventSendProjectile(string message)
         {
-            eventSendProjectile(this, new ReceiveProjectileEvent() { Rectangle = message});
+            eventSendProjectile(this, new ReceiveProjectileEvent() { Rectangle = message });
         }
+
+        /// <summary>
+        /// Notify the game that the client send a win
+        /// </summary>
         public void EventSendWin()
         {
             eventSendWin(this, new ReceiveWinEvent());

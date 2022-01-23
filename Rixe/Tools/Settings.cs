@@ -7,6 +7,10 @@ using System.Windows;
 
 namespace Rixe.Tools
 {
+
+    /// <summary>
+    /// Settings for the game
+    /// </summary>
     class Settings
     {
         public static int PLAYER_SPEED = 5;

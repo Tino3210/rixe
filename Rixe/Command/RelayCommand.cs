@@ -7,6 +7,9 @@ using System.Windows.Input;
 
 namespace Rixe.Command
 {
+    /// <summary>
+    /// Permet le Binding de Fonction
+    /// </summary>
     class RelayCommand : ICommand
     {
         private Action<object> execute;
